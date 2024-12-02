@@ -20,3 +20,11 @@ public extension String {
         return String(self[start..<end])
     }
 }
+
+
+// TODO: move to package
+public extension String {
+    var numerics: String {
+        return self.filter("01234567890".contains)
+    }
+}

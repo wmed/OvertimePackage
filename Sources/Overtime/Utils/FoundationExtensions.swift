@@ -26,12 +26,12 @@ extension ProcessInfo.ThermalState {
 }
 
 extension Double {
-    public func withPrecision(_ precision: Int) -> String {
+    public func withPrecision(_ precision: Int, truncated: Bool = false) -> String {
         let factor = pow(10.0, Double(precision))
-        if Int(self * factor) == Int(self) * Int(factor) {
+        if truncated, Int(self * factor) == Int(self) * Int(factor) {
             return String(format: "%0.0f", self)
         } else {
-            return String(format: "%0.\(precision)f", self)
+            return String(format: "%0.0\(precision)f", self)
         }
     }
 

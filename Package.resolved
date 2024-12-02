@@ -1,5 +1,5 @@
 {
-  "originHash" : "9aff016fa85e021932693445dc11189c8f86cd6fae97a16b573709ecde52aee1",
+  "originHash" : "9153e1b93a68b8e3817608360c54acc24b31a5d0a018a046314fed36614799ba",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "9815e6c29d43cb5314add5dff8705c5476ab556c",
         "version" : "10.53.0"
+      }
+    },
+    {
+      "identity" : "throttler",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/boraseoksoon/Throttler.git",
+      "state" : {
+        "revision" : "bd0b16eb9c02e992e2c6cefec3abea0e74b90369",
+        "version" : "2.1.3"
       }
     }
   ],
