@@ -160,6 +160,7 @@ public class User: OvertimeObject {
 
     @Persisted public var notification_types: List<String>
     @Persisted public var favorite_team_ids: List<String>
+    @Persisted public var favorite_player_ids: List<String>
 
     var sentMessages = LinkingObjects(fromType: Message.self, property: "from_user")
 
