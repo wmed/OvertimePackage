@@ -74,7 +74,7 @@ public extension Font {
 
 public extension UIColor {
     static let backgroundDiminished = UIColor(Color.backgroundDiminished)
-    static let backgroundPrimary = UIColor.dynamicColor(light: .white, dark: .black)
+    static let backgroundPrimary = UIColor.dynamicColor(light: .white, dark: .init(int: 0x1C1E21))
     static let backgroundGray = UIColor(Color.backgroundGray)
     static let textPrimary = UIColor.dynamicColor(light: .black, dark: .white)
     static let textDiminished = UIColor(Color.textDiminished)
@@ -93,7 +93,7 @@ public extension Color {
     static let backgroundDiminished = Color(light: .init(int: 0xF4F3F3), dark: .init(int: 0x161616))
 
     static let borderGray = Color(light: .init(int: 0xD2D2D2), dark: .init(int: 0x484848))
-    static let backgroundGray = Color(light: .init(int: 0xF4F3F3), dark: .init(int: 0x1C1E21))
+    static let backgroundGray = Color(light: .init(int: 0xF4F3F3), dark: .black)
     static let textTertiary = Color(light: .init(int: 0x484848), dark: .init(int: 0xD2D2D2))
     static let textFaded = Color(light: .init(int: 0x979797), dark: .init(int: 0x646464))
 
