@@ -181,9 +181,9 @@ public class SessionManager: ObservableObject {
             appUpdateStatus = .required
         } else if let suggested = applicationConfiguration.suggested_build_number, buildNumber < suggested {
             appUpdateStatus = .suggested
+        } else {
+            appUpdateStatus = .upToDate
         }
-
-        appUpdateStatus = .upToDate
     }
 
     // MARK: Auth
