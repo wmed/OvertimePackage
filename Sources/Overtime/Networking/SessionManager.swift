@@ -90,6 +90,7 @@ private extension String {
     static let deviceIdKey = "OvertimeDeviceId"
     static let deviceUserIdKey = "OvertimeDeviceUserId"
     static let currentUserIdKey = "OvertimeCurrentUserId"
+    static let appUpdateStatusKey = "appUpdateStatus"
 }
 
 public class SessionManager: ObservableObject {
@@ -143,29 +144,46 @@ public class SessionManager: ObservableObject {
     internal let allowOfflineMode: Bool
 
     // MARK: Configuration
-    internal var applicationConfiguration: ApplicationConfiguration?
+    internal var applicationConfiguration: ApplicationConfiguration? {
+        didSet {
+            refreshAppUpdateStatus()
+        }
+    }
     public var configuration: [String:Any]? {
         return applicationConfiguration?.configuration
     }
 
-    public enum ApplicationUpdateStatus {
+    public enum ApplicationUpdateStatus: Int {
+        case upToDate
         case required
         case suggested
-        case upToDate
     }
 
-    public var appUpdateStatus: ApplicationUpdateStatus {
-        guard let applicationConfiguration else { return .upToDate }
+    public private(set) var appUpdateStatus: ApplicationUpdateStatus {
+        get {
+            let int = UserDefaults.standard.integer(forKey: .appUpdateStatusKey)
+            return ApplicationUpdateStatus(rawValue: int) ?? .upToDate
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: .appUpdateStatusKey)
+        }
+    }
+
+    func refreshAppUpdateStatus() {
+        guard let applicationConfiguration else {
+            appUpdateStatus = .upToDate
+            return
+        }
 
         let buildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "") ?? 0
         logManager.log(message: "Current build \(buildNumber). Required build \(applicationConfiguration.minimum_build_number)")
         if buildNumber < applicationConfiguration.minimum_build_number {
-            return .required
+            appUpdateStatus = .required
         } else if let suggested = applicationConfiguration.suggested_build_number, buildNumber < suggested {
-            return .suggested
+            appUpdateStatus = .suggested
         }
 
-        return .upToDate
+        appUpdateStatus = .upToDate
     }
 
     // MARK: Auth
