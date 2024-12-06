@@ -85,6 +85,10 @@ public struct ApplicationLoader<Content: View>: View {
                 .alert("New Update Required", isPresented: $showsRequiredUpdate, actions: {
                     Button("Update") {
                         UIApplication.shared.open(.appStoreUrl, options: [:], completionHandler: nil)
+                        Task {
+                            try? await Task.sleep(for: .seconds(0.5))
+                            showsRequiredUpdate = true
+                        }
                     }
                 }, message: {
                     Text("Your app is out of date. You must download the latest version to proceed.")
