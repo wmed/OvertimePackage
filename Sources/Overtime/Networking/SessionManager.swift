@@ -222,7 +222,7 @@ public class SessionManager: ObservableObject {
     }
 
     public func deleteAccount(appContext: String) async -> Bool {
-        guard let userId = currentUserId else { return false }
+        guard currentUser != nil else { return false }
 
         do {
             _ =  try await request("api/writer/\(appContext)/v1/accounts", method: .delete, parameters: nil, authenticated: true)
