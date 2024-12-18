@@ -221,7 +221,7 @@ public class SessionManager: ObservableObject {
         }
     }
 
-    public func deleteAccount(appContext: String) async throws -> Bool {
+    public func deleteAccount(appContext: String) async -> Bool {
         guard let userId = currentUserId else { return false }
 
         do {
