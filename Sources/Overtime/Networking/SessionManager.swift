@@ -221,11 +221,11 @@ public class SessionManager: ObservableObject {
         }
     }
 
-    public func deleteAccount() async throws -> Bool {
+    public func deleteAccount(appContext: String) async throws -> Bool {
         guard let userId = currentUserId else { return false }
 
         do {
-            _ =  try await request("api/writer/ote_live/v1/accounts", method: .delete, parameters: nil, authenticated: true)
+            _ =  try await request("api/writer/\(appContext)/v1/accounts", method: .delete, parameters: nil, authenticated: true)
         } catch let error {
             logManager.log(error: error, description: "Failed to delete account")
             return false
