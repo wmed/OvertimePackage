@@ -221,13 +221,25 @@ public class SessionManager: ObservableObject {
         }
     }
 
+    public func deleteAccount() async throws -> Bool {
+        guard let userId = currentUserId else { return false }
+
+        do {
+            _ =  try await request("api/writer/ote_live/v1/accounts", method: .delete, parameters: nil, authenticated: true)
+        } catch let error {
+            logManager.log(error: error, description: "Failed to delete account")
+            return false
+        }
+        return true
+    }
+
     // MARK: Session Identity
     public func updateSessionIdentity() {
         guard let currentUser else {
             logManager.log(message: "No user logged in")
             return
         }
-        logManager.log(message: "User set to \(currentUser.username)")
+        logManager.log(message: "User set to \(currentUser.username ?? "No username")")
         analyticsManager.setUserIdentity(user: currentUser)
     }
 
