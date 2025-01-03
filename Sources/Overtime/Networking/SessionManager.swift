@@ -201,6 +201,9 @@ public class SessionManager: ObservableObject {
             if oldValue != currentUserId {
                 NotificationCenter.default.post(name: .overtimeCurrentUserDidChange, object: nil)
                 updateSessionIdentity()
+            } else if #unavailable(iOS 18) {
+                NotificationCenter.default.post(name: .overtimeCurrentUserDidChange, object: nil)
+                updateSessionIdentity()
             }
         }
     }
