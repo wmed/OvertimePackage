@@ -212,7 +212,7 @@ class LocationManagerDelegate: NSObject, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .notDetermined {
-            return
+            completionHandler(true)
         }
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             completionHandler(true)
