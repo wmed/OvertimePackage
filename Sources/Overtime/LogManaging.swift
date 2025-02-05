@@ -44,6 +44,9 @@ public protocol LogManaging {
 
 public protocol AnalyticsManaging {
     func trackEvent(_ event: String, properties: [String: Any])
+    // Marks the start of a timer for an event
+    // NOTE: Must call `trackEvent` to indicte the end of that event
+    func timeEvent(_ event: String, properties: [String: Any])
     func trackError(_ error: String, properties: [String: Any])
     func setUserIdentity(user: User)
 }
@@ -109,6 +112,10 @@ public class EmptyAnalyticsManager: AnalyticsManaging {
     }
     
     public func trackEvent(_ event: String, properties: [String : Any]) {
+        // NO-OP
+    }
+
+    public func timeEvent(_ event: String, properties: [String : Any]) {
         // NO-OP
     }
 
