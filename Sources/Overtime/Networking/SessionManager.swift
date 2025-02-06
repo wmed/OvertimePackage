@@ -169,6 +169,13 @@ public class SessionManager: ObservableObject {
         }
     }
 
+    public var minimum_build_number: Int? {
+        return applicationConfiguration?.minimum_build_number
+    }
+    public var suggested_build_number: Int?{
+        return applicationConfiguration?.suggested_build_number
+    }
+
     func refreshAppUpdateStatus() {
         guard let applicationConfiguration else {
             appUpdateStatus = .upToDate
